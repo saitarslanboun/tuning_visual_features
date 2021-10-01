@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-class MultimodalTransformerDecoderLayer(Module):
+class MultimodalTransformerDecoderLayer(nn.Module):
     r"""MultimodalTransformerDecoderLayer is made up of visual-attn, self-attn, multi-head-attn and feedforward network.
 
     Args:
@@ -14,14 +14,14 @@ class MultimodalTransformerDecoderLayer(Module):
             as (batch, seq, feature). Default: ``False``.
 
     Examples::
-        >>> multimodal_decoder_layer = nn.MultimodalTransformerDecoderLayer(d_model=512, nhead=8)
+        >>> multimodal_decoder_layer = MultimodalTransformerDecoderLayer(d_model=512, nhead=8)
         >>> memory = torch.rand(10, 32, 512)
         >>> img = torch.rand(49, 32, 512)
         >>> tgt = torch.rand(20, 32, 512)
         >>> out = decoder_layer(tgt, memory)
 
     Alternatively, when ``batch_first`` is ``True``:
-        >>> multimodal_decoder_layer = nn.MultimodalTransformerDecoderLayer(d_model=512, nhead=8, batch_first=True)
+        >>> multimodal_decoder_layer = MultimodalTransformerDecoderLayer(d_model=512, nhead=8, batch_first=True)
         >>> memory = torch.rand(32, 10, 512)
         >>> img = torch.rand(32, 49, 512)
         >>> tgt = torch.rand(32, 20, 512)
@@ -92,7 +92,7 @@ class MultimodalTransformerDecoderLayer(Module):
         tgt = self.norm4(tgt)
         return tgt
 
-class MultimodalTransformerDecoder(Module):
+class MultimodalTransformerDecoder(nn.Module):
     r"""TransformerDecoder is a stack of N decoder layers
 
     Args:
@@ -101,8 +101,8 @@ class MultimodalTransformerDecoder(Module):
         norm: the layer normalization component (optional).
 
     Examples::
-        >>> multimodal_decoder_layer = nn.MultimodalTransformerDecoderLayer(d_model=512, nhead=8)
-        >>> multimodal_transformer_decoder = nn.MultimodalTransformerDecoder(decoder_layer, num_layers=6)
+        >>> multimodal_decoder_layer = MultimodalTransformerDecoderLayer(d_model=512, nhead=8)
+        >>> multimodal_transformer_decoder = MultimodalTransformerDecoder(decoder_layer, num_layers=6)
         >>> memory = torch.rand(10, 32, 512)
         >>> tgt = torch.rand(20, 32, 512)
         >>> out = transformer_decoder(tgt, memory)
