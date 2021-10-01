@@ -1,3 +1,5 @@
+from MultimodalTransformer import *
+
 import torch.nn as nn
 import torch
 
@@ -63,8 +65,8 @@ class MainModel(nn.Module):
 			self.tgt_decoder_layer = nn.TransformerDecoderLayer(512, 8)
 			self.tgt_decoder = nn.TransformerDecoder(self.tgt_decoder_layer, num_layers=6)
 		else:
-			self.tgt_decoder_layer = nn.MultimodalTransformerDecoderLayer(512, 8)
-			self.tgt_decoder = nn.MultimodalTransformerDecoder(self.tgt_decoder_layer, num_layers=6)
+			self.tgt_decoder_layer = MultimodalTransformerDecoderLayer(512, 8)
+			self.tgt_decoder = MultimodalTransformerDecoder(self.tgt_decoder_layer, num_layers=6)
 
 		# output layer
 		self.out_proj = nn.Linear(512, n_tgt_vocab)
